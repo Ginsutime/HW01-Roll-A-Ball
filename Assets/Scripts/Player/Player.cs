@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int _maxHealth = 3;
     int _currentHealth;
+    int _currentScore;
 
     BallMotor _ballMotor;
 
@@ -34,6 +35,12 @@ public class Player : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical).normalized;
 
         _ballMotor.Move(movement);
+    }
+
+    public void IncreaseScore(int amount)
+    {
+        _currentScore += amount;
+        Debug.Log("Player's score: " + _currentScore);
     }
 
     public void IncreaseHealth(int amount)
