@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PowerUpBase : MonoBehaviour
 {
-    [SerializeField] int powerupDuration = 5;
+    [SerializeField] int powerupDuration = 10;
 
     protected abstract void PowerUp(Player player);
     protected abstract void PowerDown(Player player);
