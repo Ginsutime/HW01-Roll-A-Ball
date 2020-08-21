@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BallMotor))]
 public class Player : MonoBehaviour
 {
     [SerializeField] int _maxHealth = 3;
+    [SerializeField] Text scoreText;
     int _currentHealth;
     int _currentScore;
+    public int checkDisabled = 1;
 
     BallMotor _ballMotor;
 
@@ -41,6 +44,8 @@ public class Player : MonoBehaviour
     {
         _currentScore += amount;
         Debug.Log("Player's score: " + _currentScore);
+
+        scoreText.text = ("Score: " + _currentScore.ToString());
     }
 
     public void IncreaseHealth(int amount)
@@ -52,18 +57,25 @@ public class Player : MonoBehaviour
 
     public void DecreaseHealth(int amount)
     {
-        _currentHealth -= amount;
-        Debug.Log("Player's health: " + _currentHealth);
-        if (_currentHealth <= 0)
+        if (checkDisabled == 0)
         {
-            Kill();
+            amount = 0;
+        }
+        else
+        {
+            _currentHealth -= amount;
+            Debug.Log("Player's health: " + _currentHealth);
+            if (_currentHealth <= 0)
+            {
+                Kill();
+            }
         }
     }
 
     public void Kill()
     {
-        gameObject.SetActive(false);
-        // play particles
-        // play sounds
+        if (checkDisabled == 1){
+            gameObject.SetActive(false);
+        }
     }
 }
